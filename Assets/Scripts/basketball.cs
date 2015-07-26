@@ -18,13 +18,15 @@ public class basketball : MonoBehaviour {
 
 		
 
-void OnCollisionEnter(Collision collider){
+void OnTriggerEnter(Collider collider){
 	
 	float bBallVolume = GetComponent<Rigidbody>().velocity.magnitude/ 40;
 	//Debug.Log ("bBallVolume: " + bBallVolume);
+	if(collider.gameObject.tag == "head"){
+
 	myAudio.PlayOneShot(boink, bBallVolume);
 	//Debug.Log (score);
-	if(collider.gameObject.tag == "head"){
+	
 		score++;
 		Debug.Log ("score:" + score);
 	} 
@@ -32,6 +34,11 @@ void OnCollisionEnter(Collision collider){
 		//Debug.Log ("Haha, you missed my head!");
 	//}
 	
+	}
+
+	void OnCollisionEnter(Collision Collider) {
+		float bBallVolume = GetComponent<Rigidbody>().velocity.magnitude/ 40;
+		myAudio.PlayOneShot(boink, bBallVolume);
 	}
 
 }
